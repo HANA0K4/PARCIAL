@@ -6,6 +6,6 @@ import { Chance } from './Components/Chance'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Chance/>
+    <Chance></Chance>
   </React.StrictMode>,
 )

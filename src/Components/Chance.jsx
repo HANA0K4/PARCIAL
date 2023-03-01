@@ -1,42 +1,42 @@
-import { useState } from "react"
-export const Chance = () =>{
-  const [chancesArray,setChances] = useState({});
-  const [chances,setChance] = useState([{numeroChance:0,valorChance:0}]);
+import React, { useState } from "react";
+
+export const Chance = () => {
+  const [chancesArray, setChancesArray] = useState({});
+  const [chances, setChances] = useState([{ numeroChance: "", valorChance: "" }]);
+
+  const cambiarTexto = (e) => setChancesArray({ ...chancesArray, [e.target.name]: e.target.value });
   
-
-  const cambiarTexto = e => setChances({ ...chancesArray, [e.target.name]: e.target.value })
-
-    
-  const AddChance = () => {
-    if (chances.numeroChance == " " || chances.valorChance == " ") {
-        alert("Por favor ingrese un valor")
-    
-    }else{
-        setChance([...chances,{...chancesArray}])
-        setChance("");
+  const addChance = () => {
+    if (chancesArray.numeroChance.trim() === "" || chancesArray.valorChance.trim() === "") {
+      alert("Por favor ingrese un valor");
+    } else {
+      setChances([...chances, { ...chancesArray }]);
+      setChancesArray({ numeroChance: "", valorChance: "" });
     }
-}
+  };
+  const totalValorChances = chances.reduce((total, chance) => total + parseInt(chance.valorChance), 0);
 
-   
 
-return (
+  return (
     <>
-    <br></br>
-      <input type="number" placeholder='Ingrese el numero a jugar' onChange={cambiarTexto}/>                                  
-      <br></br>
-      <input type="number" placeholder='Ingrese el valor a jugar' onChange = {cambiarTexto} />
+      <br />
+      <input type="number" placeholder="Ingrese el número a jugar" name="numeroChance" value={chancesArray.numeroChance} onChange={cambiarTexto} />
+      <br />
+      <input type="number" placeholder="Ingrese el valor a jugar" name="valorChance" value={chancesArray.valorChance} onChange={cambiarTexto} />
 
-      <button onClick={AddChance}>Jugar Chance </button>
+      <button onClick={addChance}>Jugar Chance</button>
       <ul>
-        {chances.map(chance => 
-        <li>{chance.numeroChance}{chance.numeroChance}</li>
-        )}
+        {chances.map((chance, index) => (
+          <li key={index}>
+            Número Jugado: {chance.numeroChance} - Valor Jugado: {chance.valorChance}
+          </li>
+        ))}
       </ul>
-    
-
+      <p>Total de valor de chances: {totalValorChances}</p>
     </>
-  )
-}
+  );
+};
+
 
 
 

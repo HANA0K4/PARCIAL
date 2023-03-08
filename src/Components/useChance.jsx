@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
+
 
 export const useChance = () => {
   const [chances, setChances] = useState([]);
   const [numeroChance, setNumeroChance] = useState("");
   const [valorChance, setValorChance] = useState("");
   const [pagoRealizado, setPagoRealizado] = useState(false);
+  useEffect(() => {
+    if (pagoRealizado) {
+      // aquí puedes agregar cualquier efecto que desees realizar después de un pago exitoso
+      console.log("Se realizó un pago exitoso");
+      setPagoRealizado(false); // actualizamos el estado para que el useEffect no se ejecute innecesariamente
+    }
+  }, [pagoRealizado]);
 
   const agregarChance = () => {
     if (numeroChance.trim() === "" || valorChance.trim() === "") {
@@ -31,6 +39,10 @@ export const useChance = () => {
     setChances([]);
   };
   const realizarPago = () => {setPagoRealizado(true);
+    if (chances.length === 0) {
+        alert('Debe agregar al menos un chance antes de realizar el pago');
+        return;
+      }
     alert("¡Gracias por comprar tu chance! ¡Buena suerte!");
     eliminarTodosChances();
   };

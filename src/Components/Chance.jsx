@@ -1,11 +1,7 @@
-import { useEffect } from "react";
 import { useChance } from "./useChance";
-useEffect
+
 export const Chance = () => {
   const{chances, numeroChance, valorChance, agregarChance, sumarValorChances, setNumeroChance, setValorChance,eliminarChance,realizarPago,pagoRealizado} = useChance();
-  useEffect(() => {
-    console.log("Bienvenido a Chancería React!");
-  }, []);
 
   return (
     <>

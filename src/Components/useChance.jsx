@@ -8,23 +8,24 @@ export const useChance = () => {
   const [pagoRealizado, setPagoRealizado] = useState(false);
   useEffect(() => {
     if (pagoRealizado) {
-      // aquí puedes agregar cualquier efecto que desees realizar después de un pago exitoso
       console.log("Se realizó un pago exitoso");
-      setPagoRealizado(false); // actualizamos el estado para que el useEffect no se ejecute innecesariamente
+      setPagoRealizado(false);
     }
   }, [pagoRealizado]);
 
   const agregarChance = () => {
     if (numeroChance.trim() === "" || valorChance.trim() === "") {
       alert("Por favor ingrese un valor");
-    }else if (numeroChance.trim().length <= 3) {
-        alert("El número jugado debe tener al menos 4 dígitos");}
-        else {
-            const nuevoChance = { numeroChance: numeroChance, valorChance: valorChance };
-            setChances([...chances, nuevoChance]);
-            setNumeroChance("");
-            setValorChance("");
-            }
+        }else if (numeroChance.trim().length < 3 || numeroChance.trim().length > 4 ) {
+            alert("El número jugado debe tener al menos 3 dígitos y maximo 4");
+            }else if (valorChance.trim().length < 3) {
+                alert("El minimo valor a jugar es de 100 pesitos");
+                }else {
+                        const nuevoChance = { numeroChance: numeroChance, valorChance: valorChance };
+                        setChances([...chances, nuevoChance]);
+                        setNumeroChance("");
+                        setValorChance("");
+                        }
   };
   const eliminarChance = (index) => {
     const newChances = [...chances];
